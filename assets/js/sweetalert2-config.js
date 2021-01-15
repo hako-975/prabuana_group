@@ -2,7 +2,7 @@ const flashDataSuccess = $('.flashdata-success').data('flashdata');
 
 if (flashDataSuccess) {
 	Swal.fire({
-		title: 'Berhasil',
+		title: 'Berhasil!',
 		text: flashDataSuccess + '!',
 		icon: 'success'
 	});
@@ -12,7 +12,7 @@ const flashDataFailed = $('.flashdata-failed').data('flashdata');
 
 if (flashDataFailed) {
 	Swal.fire({
-		title: 'Gagal',
+		title: 'Gagal!',
 		text: flashDataFailed + '!',
 		icon: 'error'
 	});
@@ -26,7 +26,7 @@ $('.btn-delete').on('click', function(e){
 
 	Swal.fire({
 	  title: 'Apakah Anda yakin?',
-	  text: "Menghapus data " + name,
+	  text: "Menghapus data " + name + '!',
 	  icon: 'warning',
 	  showCancelButton: true,
 	  cancelButtonColor: '#3085d6',

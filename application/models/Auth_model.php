@@ -31,13 +31,6 @@ class Auth_model extends CI_Model {
 		}
 	}
 
-	public function checkLoginMain()
-	{
-		if (!$this->session->userdata('id_user')) {
-			redirect('auth');
-		}
-	}
-
 	public function logout()
 	{
 		session_destroy();

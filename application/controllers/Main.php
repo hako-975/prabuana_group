@@ -5,14 +5,16 @@ class Main extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Auth_model', 'aumo');
+		$this->load->model('Main_model', 'mamo');
 	}
 
 	public function index()
 	{
-		$this->aumo->checkLoginMain();
+		$this->mamo->checkLoginMain();
 
+		$data['dataUser'] = $this->mamo->dataUser();
 		$data['title'] = 'Dasbor';
+		
 		$this->load->view('templates/header', $data);
 		$this->load->view('main/index', $data);
 		$this->load->view('templates/footer', $data);
