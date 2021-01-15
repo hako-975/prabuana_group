@@ -30,7 +30,7 @@ class Role extends CI_Controller {
 		$data['dataUser'] = $this->mamo->dataUser();
 		$data['title'] = 'Jabatan';
 
-		$this->form_validation->set_rules('role_name', 'Nama Jabatan', 'required');
+		$this->form_validation->set_rules('role_name', 'Nama Jabatan', 'required|is_unique[roles.role_name]');
 		if ($this->form_validation->run() == FALSE) {
 			$data['error_insert'] = true;
 			$this->load->view('templates/header', $data);
@@ -49,7 +49,7 @@ class Role extends CI_Controller {
 		$data['dataUser'] = $this->mamo->dataUser();
 		$data['title'] = 'Jabatan';
 
-		$this->form_validation->set_rules('role_name', 'Nama Jabatan', 'required');
+		$this->form_validation->set_rules('role_name', 'Nama Jabatan', 'required|is_unique[roles.role_name]');
 		if ($this->form_validation->run() == FALSE) {
 			$data['error_update'] = true;
 			$this->load->view('templates/header', $data);
