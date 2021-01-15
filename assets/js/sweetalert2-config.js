@@ -29,10 +29,31 @@ $('.btn-delete').on('click', function(e){
 	  text: "Menghapus data " + name,
 	  icon: 'warning',
 	  showCancelButton: true,
-	  confirmButtonColor: '#3085d6',
-	  cancelButtonColor: '#d33',
+	  cancelButtonColor: '#3085d6',
+	  confirmButtonColor: '#d33',
 	  cancelButtonText: 'Batal',
 	  confirmButtonText: 'Hapus Data!'
+	}).then((result) => {
+	  if (result.value) {
+	    document.location.href = href;
+	  }
+	});
+});
+
+$('.btn-logout').on('click', function(e){
+	e.preventDefault();
+
+	const href = $(this).attr('href');
+
+	Swal.fire({
+	  title: 'Apakah Anda yakin?',
+	  text: "Keluar dari Aplikasi?",
+	  icon: 'warning',
+	  showCancelButton: true,
+	  cancelButtonColor: '#3085d6',
+	  confirmButtonColor: '#d33',
+	  cancelButtonText: 'Batal',
+	  confirmButtonText: 'Keluar!'
 	}).then((result) => {
 	  if (result.value) {
 	    document.location.href = href;
