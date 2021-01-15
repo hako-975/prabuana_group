@@ -5,7 +5,8 @@ class Log_model extends CI_Model {
 
 	public function getLog()
 	{
-		return $this->db->get('log')->result_array();
+		$this->db->order_by('id_log', 'desc');
+		return $this->db->get('logs')->result_array();
 	}
 
 	public function insertLog($content_log, $id_user)

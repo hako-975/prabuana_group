@@ -8,12 +8,14 @@
           Dasbor
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('role'); ?>">
-          <i class="fas fa-fw fa-user-tie"></i>
-          Jabatan
-        </a>
-      </li>
+      <?php if ($dataUser['id_role'] == '1'): ?>
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url('role'); ?>">
+            <i class="fas fa-fw fa-user-tie"></i>
+            Jabatan
+          </a>
+        </li>
+      <?php endif ?>
       <li class="nav-item">
         <a class="nav-link" href="<?= base_url('user'); ?>">
           <i class="fas fa-fw fa-user"></i>
