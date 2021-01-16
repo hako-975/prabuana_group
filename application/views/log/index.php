@@ -12,11 +12,11 @@
       </div>
 
       <div class="table-responsive">
-        <table class="table table-striped table-sm" id="table_id">
+        <table class="table table-striped table-sm align-middle" id="table_id">
           <thead>
             <tr>
               <th>No. </th>
-              <th>Isi Riwayat</th>
+              <th style="width: 49.5rem">Isi Riwayat</th>
               <th>Tanggal</th>
               <th>Pelaku</th>
             </tr>

@@ -50,7 +50,7 @@
       <?php endif ?>
 
       <div class="table-responsive">
-        <table class="table table-striped table-sm" id="table_id">
+        <table class="table table-striped table-sm align-middle" id="table_id">
           <thead>
             <tr>
               <th>No.</th>
@@ -69,8 +69,8 @@
                 <?php if ($dataUser['id_role'] == '1'): ?>
                   <td>
                   <?php if ($dr['id_role'] != '1'): ?>
-                    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#updateRoleModal<?= $dr['id_role']; ?>" href="#"><i class="fas fa-fw fa-edit"></i> Ubah</a> 
-                    <a class="btn btn-sm btn-danger btn-delete" data-name="<?= $dr['role_name']; ?>" href="<?= base_url('role/delete/') . $dr['id_role']; ?>"><i class="fas fa-fw fa-trash"></i> Hapus</a>
+                    <a class="m-1 btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#updateRoleModal<?= $dr['id_role']; ?>" href="#"><i class="fas fa-fw fa-edit"></i> Ubah</a> 
+                    <a class="m-1 btn btn-sm btn-danger btn-delete" data-name="<?= $dr['role_name']; ?>" href="<?= base_url('role/delete/') . $dr['id_role']; ?>"><i class="fas fa-fw fa-trash"></i> Hapus</a>
                   <?php endif ?>
 
                   <!-- Modal Update -->

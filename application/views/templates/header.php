@@ -14,6 +14,9 @@
 	<!-- DataTables CSS -->
 	<link rel="stylesheet" href="<?= base_url('assets/vendor/datatables/DataTables-1.10.23/css/dataTables.bootstrap4.min.css'); ?>">
 
+	<!-- Fancybox -->
+	<link rel="stylesheet" href="<?= base_url('assets/vendor/fancybox/jquery.fancybox.min.css'); ?>">
+
 	<!-- Fontawesome CSS -->
 	<link rel="stylesheet" href="<?= base_url('assets/vendor/fontawesome/css/all.min.css'); ?>">
 

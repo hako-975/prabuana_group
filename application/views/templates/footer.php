@@ -3,8 +3,9 @@
 	<div class="flashdata-success" data-flashdata="<?= $this->session->flashdata('message-success'); ?>"></div>
 	<div class="flashdata-failed" data-flashdata="<?= $this->session->flashdata('message-failed'); ?>"></div>
 
-	<!-- jQuery, Popper, Bootstrap, ChartJS, DataTables, Fontawesome, SweetAlert2 -->
+	<!-- jQuery, Fancybox, Popper, Bootstrap, ChartJS, DataTables, Fontawesome, SweetAlert2 -->
 	<script src="<?= base_url('assets/vendor/jquery/jquery-3.5.1.min.js'); ?>"></script>
+	<script src="<?= base_url('assets/vendor/fancybox/jquery.fancybox.min.js'); ?>"></script>
 	<script src="<?= base_url('assets/vendor/popper/popper.min.js'); ?>"></script>
 	<script src="<?= base_url('assets/vendor/bootstrap/js/bootstrap.min.js'); ?>"></script>
 	<script src="<?= base_url('assets/vendor/chartjs/dist/Chart.min.js'); ?>"></script>
@@ -15,6 +16,7 @@
 	<script src="<?= base_url('assets/js/prabuana_group.js'); ?>"></script>
 
 	<!-- Configuration Plugin -->
+	<script src="<?= base_url('assets/js/fancybox-config.js'); ?>"></script>
 	<script src="<?= base_url('assets/js/popper-config.js'); ?>"></script>
 	<script src="<?= base_url('assets/js/datatables-config.js'); ?>"></script>
 	<script src="<?= base_url('assets/js/sweetalert2-config.js'); ?>"></script>
