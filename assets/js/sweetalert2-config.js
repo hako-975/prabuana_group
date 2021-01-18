@@ -60,3 +60,25 @@ $('.btn-logout').on('click', function(e){
 	  }
 	});
 });
+
+$('.btn-confirm').on('click', function(e){
+	e.preventDefault();
+
+	const href = $(this).attr('href');
+	const name = $(this).data('name');
+
+	Swal.fire({
+	  title: 'Apakah Anda yakin?',
+	  text: "Membatalkan tambah pengguna?" + " pergi ke halaman " + name,
+	  icon: 'warning',
+	  showCancelButton: true,
+	  cancelButtonColor: '#3085d6',
+	  confirmButtonColor: '#d33',
+	  cancelButtonText: 'Tutup',
+	  confirmButtonText: 'Batalkan dan ' + name + "!"
+	}).then((result) => {
+	  if (result.value) {
+	    document.location.href = href;
+	  }
+	});
+});

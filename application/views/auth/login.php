@@ -8,7 +8,7 @@
 		<div class="col-lg-4">
 			<form action="<?= base_url('auth/login'); ?>" method="post">
 				<div class="mb-3">
-					<label class="form-label" for="username"><i class="fas fa-fw fa-user"></i> Nama Pengguna</label>
+					<label class="form-label" for="username"><i class="fas fa-fw fa-user"></i> Nama Pengguna atau Email</label>
 					<input type="text" id="username" class="form-control" name="username" required>
 				</div>
 				<div class="mb-3">

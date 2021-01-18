@@ -62,7 +62,6 @@ class Role extends CI_Controller {
 
 	public function delete($id)
 	{
-		$data['dataUser'] = $this->mamo->dataUser();
 		$this->romo->deleteRole($id);
 	}
 }

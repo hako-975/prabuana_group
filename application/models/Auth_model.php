@@ -7,6 +7,11 @@ class Auth_model extends CI_Model {
 	{
 		$checkUsername = $this->db->get_where('users', ['username' => $username])->row_array();
 		
+		if ($checkUsername == false) {
+			$this->db->join('biodata', 'users.id_biodata = biodata.id_biodata');
+			$checkUsername = $this->db->get_where('users', ['email' => $username])->row_array();
+		}
+
 		if ($checkUsername) {
 			if (password_verify($password, $checkUsername['password'])) {
 				$dataSession = [
@@ -15,11 +20,11 @@ class Auth_model extends CI_Model {
 				$this->session->set_userdata($dataSession);
 				redirect('main');
 			} else {
-				$this->session->set_flashdata('message-failed', 'Password yang anda masukkan salah');
+				$this->session->set_flashdata('message-failed', 'Kata Sandi yang anda masukkan salah');
 				redirect('auth');
 			}	
 		} else {
-			$this->session->set_flashdata('message-failed', 'Username yang anda masukkan salah');
+			$this->session->set_flashdata('message-failed', 'Nama Pengguna yang anda masukkan salah');
 			redirect('auth');
 		}
 	}

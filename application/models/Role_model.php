@@ -24,7 +24,7 @@ class Role_model extends CI_Model {
 	{
 		$dataUser = $this->mamo->dataUser();
 		$data = [
-			'role_name' => $this->input->post('role_name', true)
+			'role_name' => ucwords(strtolower($this->input->post('role_name', true)))
 		];
 		$this->mamo->checkAccessAdministratorOnly("menambahkan Jabatan " . $data['role_name']);
 
@@ -43,7 +43,7 @@ class Role_model extends CI_Model {
 		$role_name = $dr['role_name'];
 		
 		$data = [
-			'role_name' => $this->input->post('role_name', true)
+			'role_name' => ucwords(strtolower($this->input->post('role_name', true)))
 		];
 
 		$this->mamo->checkAccessAdministratorOnly("mengubah Jabatan " . $role_name . " menjadi " . $data['role_name']);

@@ -10,17 +10,17 @@
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h2>Karyawan</h2>
         <?php if (isset($error_insert)): ?>
-          <div class="flashdata-failed" data-flashdata="Gagal Menambahkan Biodata"></div>
+          <div class="flashdata-failed" data-flashdata="Gagal Menambahkan Karyawan"></div>
         <?php endif ?>
         <?php if (isset($error_update)): ?>
-          <div class="flashdata-failed" data-flashdata="Gagal Mengubah Biodata"></div>
+          <div class="flashdata-failed" data-flashdata="Gagal Mengubah Karyawan"></div>
         <?php endif ?>
-        <?php if ($dataUser['id_biodata'] == '1'): ?>
+        <?php if ($dataUser['id_role'] == '1'): ?>
           <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#insertBiodataModal"><i class="fas fa-fw fa-plus"></i> Tambah Karyawan</button>
         <?php endif ?>
       </div>
 
-      <?php if ($dataUser['id_biodata'] == '1'): ?>
+      <?php if ($dataUser['id_role'] == '1'): ?>
         <!-- Insert Biodata Modal -->
         <div class="modal fade" id="insertBiodataModal" tabindex="-1" aria-labelledby="insertBiodataModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -69,14 +69,16 @@
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="address"><i class="fas fa-fw fa-map-marker-alt"></i> Alamat</label>
-                    <textarea id="address" class="form-control" name="address" required></textarea>
+                    <textarea id="address" class="form-control <?= (form_error('address')) ? 'is-invalid' : ''; ?>" name="address" required><?= set_value('address'); ?></textarea>
+                    <div class="invalid-feedback">
+                      <?= form_error('address'); ?>
+                    </div>
                   </div>
-                  
                   <div class="mb-3">
                     <div class="row">
                       <div class="col-lg-4 text-center">
-                        <a href="<?= base_url('assets/img/img_profiles/default.png'); ?>" class="enlarge">
-                          <img class="img-300 img-fluid rounded" src="<?= base_url('assets/img/img_profiles/default.png'); ?>" alt="photo">
+                        <a href="<?= base_url('assets/img/img_profiles/default.png'); ?>" class="enlarge check_enlarge_photo">
+                          <img class="check_photo img-300 img-fluid rounded" src="<?= base_url('assets/img/img_profiles/default.png'); ?>" alt="photo">
                         </a>
                         <small class="d-block">Klik foto untuk perbesar</small>
                       </div>
@@ -103,11 +105,11 @@
 
       <div class="table-responsive">
         <table class="table table-striped table-sm align-middle" id="table_id">
-          <thead>
+          <thead class="text-center">
             <tr>
               <th>No.</th>
               <th>Nama Lengkap</th>
-              <th>Jenis Kelamin</th>
+              <th>Email</th>
               <th>No. Telepon</th>
               <th>Pengguna</th>
               <?php if ($dataUser['id_role'] == '1'): ?>
@@ -121,13 +123,7 @@
               <tr>
                 <td><?= $i++; ?></td>
                 <td><?= $db['full_name']; ?></td>
-                <td>
-                  <?php if ($db['gender'] == 'male'): ?>
-                    Laki-laki
-                  <?php else: ?>
-                    Perempuan  
-                  <?php endif ?>
-                </td>
+                <td><?= $db['email']; ?></td>
                 <td><?= $db['phone_number']; ?></td>
                 <td class="text-center my-auto">
                   <?php if ($db['id_user']): ?>
@@ -140,22 +136,26 @@
                 </td>
                 <td>
                   <a class="m-1 btn btn-sm btn-info text-white" href="<?= base_url('biodata/detail/') . $db['id_biodata']; ?>"><i class="fas fa-fw fa-info"></i> Detail</a>
+                  <!-- jika data pengguna itu sendiri -->
                   <?php if ($db['id_biodata'] == $dataUser['id_biodata']): ?>
                     <a class="m-1 btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#updateBiodataModal<?= $db['id_biodata']; ?>" href="#"><i class="fas fa-fw fa-edit"></i> Ubah</a> 
                   <?php endif ?>
+                  <!-- jika login sebagai admin -->
                   <?php if ($dataUser['id_role'] == '1'): ?>
+                    <!-- jika bukan admin, dapat diubah dan dihapus -->
                     <?php if ($db['id_role'] != '1'): ?>
                       <a class="m-1 btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#updateBiodataModal<?= $db['id_biodata']; ?>" href="#"><i class="fas fa-fw fa-edit"></i> Ubah</a> 
                       <a class="m-1 btn btn-sm btn-danger btn-delete" data-name="<?= $db['full_name']; ?>" href="<?= base_url('biodata/delete/') . $db['id_biodata']; ?>"><i class="fas fa-fw fa-trash"></i> Hapus</a>
                     <?php endif ?>
                   <?php endif ?>
+                  
                   <!-- Modal Update -->
-                  <div class="modal fade" id="updateBiodataModal<?= $db['id_biodata']; ?>" tabindex="-1" aria-labelledby="insertBiodataModalLabel<?= $db['id_biodata']; ?>" aria-hidden="true">
+                  <div class="modal fade" id="updateBiodataModal<?= $db['id_biodata']; ?>" tabindex="-1" aria-labelledby="updateBiodataModalLabel<?= $db['id_biodata']; ?>" aria-hidden="true">
                     <div class="modal-dialog">
                       <form action="<?= base_url('biodata/update/') . $db['id_biodata']; ?>" method="post" enctype="multipart/form-data">
-                        <div class="modal-content">
+                        <div class="modal-content ">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="insertBiodataModalLabel"><i class="fas fa-fw fa-edit"></i> Ubah Karyawan</h5>
+                            <h5 class="modal-title" id="updateBiodataModalLabel"><i class="fas fa-fw fa-edit"></i> Ubah Karyawan</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
@@ -205,7 +205,10 @@
                             </div>
                             <div class="mb-3">
                               <label class="form-label" for="address<?= $db['id_biodata']; ?>"><i class="fas fa-fw fa-map-marker-alt"></i> Alamat</label>
-                              <textarea id="address<?= $db['id_biodata']; ?>" class="form-control" name="address" required><?= ($db['address']) ? $db['address'] : set_value('address'); ?></textarea>
+                              <textarea id="address<?= $db['id_biodata']; ?>" class="form-control <?= (form_error('address')) ? 'is-invalid' : ''; ?>" name="address" required><?= ($db['address']) ? $db['address'] : set_value('address'); ?></textarea>
+                              <div class="invalid-feedback">
+                                <?= form_error('email'); ?>
+                              </div>
                             </div>
                             <div class="mb-3">
                               <div class="row">
@@ -218,12 +221,14 @@
                                 <div class="col-lg">
                                   <label for="photo<?= $db['id_biodata']; ?>" class="form-label"><i class="fas fa-fw fa-image"></i> Foto (opsional)</label>
                                   <input class="form-control form-control-sm check_photo photo" name="photo" id="photo<?= $db['id_biodata']; ?>" type="file">
+                                  <small>Kosongkan jika tidak ingin mengubah</small>
                                 </div>
                               </div>
                             </div>
                             <div class="mb-3">
                               <label for="file_cv<?= $db['id_biodata']; ?>" class="form-label"><i class="fas fa-fw fa-file-pdf"></i> File CV (opsional)</label>
                               <input class="form-control form-control-sm" name="file_cv" type="file" id="file_cv<?= $db['id_biodata']; ?>">
+                              <small>Kosongkan jika tidak ingin mengubah</small>
                             </div>
                           </div>
                           <div class="modal-footer">

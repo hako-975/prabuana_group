@@ -66,39 +66,41 @@
               <tr>
                 <td><?= $i++; ?></td>
                 <td><?= $dr['role_name']; ?></td>
+                <!-- jika pengguna sebagai admin -->
                 <?php if ($dataUser['id_role'] == '1'): ?>
                   <td>
-                  <?php if ($dr['id_role'] != '1'): ?>
-                    <a class="m-1 btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#updateRoleModal<?= $dr['id_role']; ?>" href="#"><i class="fas fa-fw fa-edit"></i> Ubah</a> 
-                    <a class="m-1 btn btn-sm btn-danger btn-delete" data-name="<?= $dr['role_name']; ?>" href="<?= base_url('role/delete/') . $dr['id_role']; ?>"><i class="fas fa-fw fa-trash"></i> Hapus</a>
-                  <?php endif ?>
+                    <!-- jika admin, tidak boleh diubah dan dihapus -->
+                    <?php if ($dr['id_role'] != '1'): ?>
+                      <a class="m-1 btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#updateRoleModal<?= $dr['id_role']; ?>" href="#"><i class="fas fa-fw fa-edit"></i> Ubah</a> 
+                      <a class="m-1 btn btn-sm btn-danger btn-delete" data-name="<?= $dr['role_name']; ?>" href="<?= base_url('role/delete/') . $dr['id_role']; ?>"><i class="fas fa-fw fa-trash"></i> Hapus</a>
+                    <?php endif ?>
 
-                  <!-- Modal Update -->
-                  <div class="modal fade" id="updateRoleModal<?= $dr['id_role']; ?>" tabindex="-1" aria-labelledby="insertRoleModalLabel<?= $dr['id_role']; ?>" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <form action="<?= base_url('role/update/') . $dr['id_role']; ?>" method="post">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="insertRoleModalLabel<?= $dr['id_role']; ?>"><i class="fas fa-fw fa-edit"></i> Ubah Jabatan</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            <div class="mb-3">
-                              <label class="form-label" for="role_name<?= $dr['id_role']; ?>"><i class="fas fa-fw fa-user"></i> Nama Jabatan</label>
-                              <input type="text" id="role_name<?= $dr['id_role']; ?>" name="role_name" required class="form-control <?= (form_error('role_name')) ? 'is-invalid' : ''; ?>" value="<?= ($dr['role_name']) ? $dr['role_name'] : set_value('role_name'); ?>">
-                              <div class="invalid-feedback">
-                                <?= form_error('role_name'); ?>
+                    <!-- Modal Update -->
+                    <div class="modal fade" id="updateRoleModal<?= $dr['id_role']; ?>" tabindex="-1" aria-labelledby="insertRoleModalLabel<?= $dr['id_role']; ?>" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <form action="<?= base_url('role/update/') . $dr['id_role']; ?>" method="post">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="insertRoleModalLabel<?= $dr['id_role']; ?>"><i class="fas fa-fw fa-edit"></i> Ubah Jabatan</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="mb-3">
+                                <label class="form-label" for="role_name<?= $dr['id_role']; ?>"><i class="fas fa-fw fa-user"></i> Nama Jabatan</label>
+                                <input type="text" id="role_name<?= $dr['id_role']; ?>" name="role_name" required class="form-control <?= (form_error('role_name')) ? 'is-invalid' : ''; ?>" value="<?= ($dr['role_name']) ? $dr['role_name'] : set_value('role_name'); ?>">
+                                <div class="invalid-feedback">
+                                  <?= form_error('role_name'); ?>
+                                </div>
                               </div>
                             </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa-fw fa-times"></i> Tutup</button>
+                              <button type="submit" class="btn btn-primary"><i class="fas fa-fw fa-save"></i> Simpan</button>
+                            </div>
                           </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa-fw fa-times"></i> Tutup</button>
-                            <button type="submit" class="btn btn-primary"><i class="fas fa-fw fa-save"></i> Simpan</button>
-                          </div>
-                        </div>
-                      </form>
+                        </form>
+                      </div>
                     </div>
-                  </div>
                   </td>
                 <?php endif ?>
               </tr>
