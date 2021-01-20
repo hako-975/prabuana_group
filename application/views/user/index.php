@@ -33,7 +33,7 @@
                 <div class="modal-body">
                   <div class="mb-3">
                     <label class="form-label" for="id_biodata"><i class="fas fa-fw fa-id-badge"></i> Nama Karyawan</label>
-                    <select id="id_biodata" class="form-control <?= (form_error('id_biodata')) ? 'is-invalid' : ''; ?>" name="id_biodata">
+                    <select id="id_biodata" class="form-select <?= (form_error('id_biodata')) ? 'is-invalid' : ''; ?>" name="id_biodata">
                       <option value="0">--- Pilih Karyawan ---</option>
                       <?php foreach ($biodata as $db): ?>
                         <?php if ($db['id_user']): ?>
@@ -52,7 +52,7 @@
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="id_role"><i class="fas fa-fw fa-id-badge"></i> Nama Jabatan</label>
-                    <select id="id_role" class="form-control <?= (form_error('id_role')) ? 'is-invalid' : ''; ?>" name="id_role">
+                    <select id="id_role" class="form-select <?= (form_error('id_role')) ? 'is-invalid' : ''; ?>" name="id_role">
                       <option value="0">--- Pilih Jabatan ---</option>
                       <?php foreach ($role as $dr): ?>
                         <option value="<?= $dr['id_role']; ?>"><?= $dr['role_name']; ?></option>
@@ -73,14 +73,14 @@
                     </div>
                   </div>
                   <div class="mb-3">
-                    <label class="form-label" for="password"><i class="fas fa-fw fa-lock"></i> Kata Sandi</label>
+                    <label class="form-label" for="password"><i class="fas fa-fw fa-user-lock"></i> Kata Sandi</label>
                     <input type="password" id="password" name="password" required class="form-control <?= (form_error('password')) ? 'is-invalid' : ''; ?>" value="<?= set_value('password'); ?>">
                     <div class="invalid-feedback">
                       <?= form_error('password'); ?>
                     </div>
                   </div>
                   <div class="mb-3">
-                    <label class="form-label" for="password_verify"><i class="fas fa-fw fa-lock"></i> Verifikasi Kata Sandi</label>
+                    <label class="form-label" for="password_verify"><i class="fas fa-fw fa-user-lock"></i> Verifikasi Kata Sandi</label>
                     <input type="password" id="password_verify" name="password_verify" required class="form-control <?= (form_error('password_verify')) ? 'is-invalid' : ''; ?>" value="<?= set_value('password_verify'); ?>">
                     <div class="invalid-feedback">
                       <?= form_error('password_verify'); ?>
@@ -126,7 +126,51 @@
                       <a class="m-1 btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#updateUserModal<?= $du['id_user']; ?>" href="#"><i class="fas fa-fw fa-edit"></i> Ubah</a> 
                       <a class="m-1 btn btn-sm btn-danger btn-delete" data-name="<?= $du['username']; ?>" href="<?= base_url('user/delete/') . $du['id_user']; ?>"><i class="fas fa-fw fa-trash"></i> Hapus</a>
                     <?php endif ?>
-                    </td>
+                    <!-- modal update -->
+                    <div class="modal fade" id="updateUserModal<?= $du['id_user']; ?>" tabindex="-1" aria-labelledby="updateUserModalLabel<?= $du['id_user']; ?>" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <form action="<?= base_url('user/update'); ?>" method="post">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="updateUserModalLabel<?= $du['id_user']; ?>"><i class="fas fa-fw fa-edit"></i> Ubah Pengguna</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="mb-3">
+                                <label class="form-label" for="id_biodata"><i class="fas fa-fw fa-id-badge"></i> Nama Karyawan</label>
+                                <input style="cursor: not-allowed;" class="form-control" type="text" disabled value="<?= $du['full_name']; ?>">
+                              </div>
+                              <div class="mb-3">
+                                <label class="form-label" for="id_role"><i class="fas fa-fw fa-id-badge"></i> Nama Jabatan</label>
+                                <select id="id_role" class="form-select <?= (form_error('id_role')) ? 'is-invalid' : ''; ?>" name="id_role">
+                                  <option value="<?= $du['id_role']; ?>"><?= $du['role_name']; ?></option>
+                                  <?php foreach ($role as $dr): ?>
+                                    <?php if ($du['id_role'] != $dr['id_role']): ?>
+                                      <option value="<?= $dr['id_role']; ?>"><?= $dr['role_name']; ?></option>
+                                    <?php endif ?>
+                                  <?php endforeach ?>
+                                </select>
+                                <div class="invalid-feedback">
+                                  <?= form_error('id_role'); ?>
+                                </div>
+                              </div>
+                              <div class="mb-3">
+                                <label class="form-label" for="username"><i class="fas fa-fw fa-user"></i> Nama Pengguna</label>
+                                <input type="text" id="username" name="username" required class="form-control <?= (form_error('username')) ? 'is-invalid' : ''; ?>" value="<?= ($du['username']) ? $du['username'] : set_value('username'); ?>">
+                                <div class="invalid-feedback">
+                                  <?= form_error('username'); ?>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa-fw fa-times"></i> Tutup</button>
+                              <button type="submit" class="btn btn-primary"><i class="fas fa-fw fa-save"></i> Simpan</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </td>
                 <?php endif ?>
               </tr>
             <?php endforeach ?>

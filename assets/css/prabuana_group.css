@@ -113,9 +113,13 @@ body {
 	background-color: #191C1F;
 }
 
-.img-300 {
+.img-75 {
 	width: 75px!important;
 	height: 75px!important;
+}
+
+.img-300 {
+	width: 300px!important;
 }
 
 /* prabuana group color */
@@ -130,3 +134,23 @@ body {
 .green-color {
 	color: #395D2D;
 }
+
+/*desktop*/
+@media (min-width: 1135px) {
+	.desktop {
+		display: inline-block;
+	}
+	.android {
+		display: none;
+	}
+}
+/*android*/
+@media (min-width: 480px) and (max-width: 1135px) {
+	.desktop {
+		display: none;
+	}
+	.android {
+		display: inline-block;
+	}
+}
+

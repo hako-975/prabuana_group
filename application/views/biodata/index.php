@@ -78,7 +78,7 @@
                     <div class="row">
                       <div class="col-lg-4 text-center">
                         <a href="<?= base_url('assets/img/img_profiles/default.png'); ?>" class="enlarge check_enlarge_photo">
-                          <img class="check_photo img-300 img-fluid rounded" src="<?= base_url('assets/img/img_profiles/default.png'); ?>" alt="photo">
+                          <img class="check_photo img-75 img-fluid rounded" src="<?= base_url('assets/img/img_profiles/default.png'); ?>" alt="photo">
                         </a>
                         <small class="d-block">Klik foto untuk perbesar</small>
                       </div>
@@ -112,9 +112,7 @@
               <th>Email</th>
               <th>No. Telepon</th>
               <th>Pengguna</th>
-              <?php if ($dataUser['id_role'] == '1'): ?>
-                <th>Aksi</th>
-              <?php endif ?>
+              <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
@@ -137,9 +135,9 @@
                 <td>
                   <a class="m-1 btn btn-sm btn-info text-white" href="<?= base_url('biodata/detail/') . $db['id_biodata']; ?>"><i class="fas fa-fw fa-info"></i> Detail</a>
                   <!-- jika data pengguna itu sendiri -->
-                  <?php if ($db['id_biodata'] == $dataUser['id_biodata']): ?>
+                  <!-- <?php if ($db['id_biodata'] == $dataUser['id_biodata']): ?>
                     <a class="m-1 btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#updateBiodataModal<?= $db['id_biodata']; ?>" href="#"><i class="fas fa-fw fa-edit"></i> Ubah</a> 
-                  <?php endif ?>
+                  <?php endif ?> -->
                   <!-- jika login sebagai admin -->
                   <?php if ($dataUser['id_role'] == '1'): ?>
                     <!-- jika bukan admin, dapat diubah dan dihapus -->
@@ -153,6 +151,7 @@
                   <div class="modal fade" id="updateBiodataModal<?= $db['id_biodata']; ?>" tabindex="-1" aria-labelledby="updateBiodataModalLabel<?= $db['id_biodata']; ?>" aria-hidden="true">
                     <div class="modal-dialog">
                       <form action="<?= base_url('biodata/update/') . $db['id_biodata']; ?>" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="current_url" value="/">
                         <div class="modal-content ">
                           <div class="modal-header">
                             <h5 class="modal-title" id="updateBiodataModalLabel"><i class="fas fa-fw fa-edit"></i> Ubah Karyawan</h5>
@@ -214,7 +213,7 @@
                               <div class="row">
                                 <div class="col-lg-4 text-center">
                                   <a href="<?= base_url('assets/img/img_profiles/') . $db['photo']; ?>" class="enlarge check_enlarge_photo">
-                                    <img class="check_photo img-300 img-fluid rounded" src="<?= base_url('assets/img/img_profiles/') . $db['photo']; ?>" alt="photo">
+                                    <img class="check_photo img-75 img-fluid rounded" src="<?= base_url('assets/img/img_profiles/') . $db['photo']; ?>" alt="photo">
                                   </a>
                                   <small class="d-block">Klik foto untuk perbesar</small>
                                 </div>

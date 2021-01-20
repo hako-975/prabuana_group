@@ -9,7 +9,7 @@
       <i class="fas fa-fw fa-user"></i> <?= $dataUser['username']; ?>
     </button>
     <ul class="dropdown-menu dropdown-menu-lg-end">
-      <li><a href="<?= base_url('main/profile'); ?>" class="dropdown-item"><i class="fas fa-fw fa-user"></i> Profil</a></li>
+      <li><a href="<?= base_url('biodata/profile'); ?>" class="dropdown-item"><i class="fas fa-fw fa-user"></i> Profil</a></li>
       <li><a href="<?= base_url('auth/logout'); ?>" class="dropdown-item btn-logout"><i class="fas fa-fw fa-sign-out-alt"></i> Keluar</a></li>
     </ul>
   </div>

@@ -36,9 +36,9 @@ class Biodata_model extends CI_Model {
 
 	public function getBiodataJoinById($id)
 	{
-		$this->db->join('users', 'users.id_biodata = biodata.id_biodata', 'left');
+		$this->db->join('biodata', 'biodata.id_biodata = users.id_biodata', 'right');
 		$this->db->join('roles', 'roles.id_role = users.id_role', 'left');
-		return $this->db->get_where('biodata', ['biodata.id_biodata' => $id])->row_array();
+		return $this->db->get_where('users', ['biodata.id_biodata' => $id])->row_array();
 	}
 
 	public function insertBiodata()
@@ -78,8 +78,11 @@ class Biodata_model extends CI_Model {
 		if ($file_cv) {
 			$config['upload_path'] = './assets/file/file_cv/';
 			$config['allowed_types'] = 'doc|docx|pdf|xls|xlsx';
-		
-			$this->upload->initialize($config);
+			if ($photo == null) {
+				$this->load->library('upload', $config);
+			} else {
+				$this->upload->initialize($config);
+			}
 		
 			if ($this->upload->do_upload('file_cv')) {
 				$new_file_cv = $this->upload->data('file_name');
@@ -169,8 +172,8 @@ class Biodata_model extends CI_Model {
 			" mengubah Email " . $email. " menjadi " . $data['email'] . ", " .
 			" mengubah Alamat " . $address. " menjadi " . $data['address'] . ", " .
 			" mengubah Jenis Kelamin " . $gender. " menjadi " . $data['gender'], $dataUser['id_user']);
-
-		redirect('biodata');
+		$current_url = $this->input->post('current_url', true);
+		redirect('biodata' . $current_url);
 	}
 
 	public function deleteBiodata($id)
@@ -187,7 +190,8 @@ class Biodata_model extends CI_Model {
 			unlink(FCPATH . 'assets/img/img_profiles/' . $db['photo']);
 		}
 		unlink(FCPATH . 'assets/file/file_cv/' . $db['file_cv']);
-		$this->db->delete('biodata', ['id_biodata' => $id]);
+		$this->db->delete('users', ['users.id_biodata' => $id]);
+		$this->db->delete('biodata', ['biodata.id_biodata' => $id]);
 		$this->session->set_flashdata('message-success', 'Karyawan ' . $full_name . ' berhasil dihapus');
 		$this->lomo->insertLog($dataUser['username'] . " berhasil menghapus Karyawan " . $full_name, $dataUser['id_user']);
 		redirect('biodata');

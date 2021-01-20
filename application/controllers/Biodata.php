@@ -21,6 +21,17 @@ class Biodata extends CI_Controller {
 		$this->load->view('biodata/index', $data);
 		$this->load->view('templates/footer', $data);
 	}
+	
+	public function profile()
+	{
+		$this->mamo->checkLoginMain();
+		$data['dataUser'] = $this->mamo->dataUser();
+		$data['title'] = 'Profil';
+		
+		$this->load->view('templates/header', $data);
+		$this->load->view('biodata/profile', $data);
+		$this->load->view('templates/footer', $data);
+	}
 
 	public function detail($id)
 	{

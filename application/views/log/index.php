@@ -33,7 +33,12 @@
                 <td><?= $i++; ?></td>
                 <td><?= $dl['content_log']; ?></td>
                 <td><?= date("d-m-Y, H:i:s", $dl['date_log']); ?></td>
-                <td><?= $data['username']; ?></td>
+                <?php if ($data != null): ?>
+                  <td><?= $data['username']; ?></td>
+                <?php else: ?>
+                  <td>-</td>
+                <?php endif ?>
+                  
               </tr>
             <?php endforeach ?>
           </tbody>

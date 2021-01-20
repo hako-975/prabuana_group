@@ -72,6 +72,26 @@ class User extends CI_Controller {
 		}
 	}
 
+	public function changePassword()
+	{
+		$this->mamo->checkLoginMain();
+
+		$data['dataUser'] = $this->mamo->dataUser();
+		$data['title'] = 'Profil';
+
+		$this->form_validation->set_rules('old_password', 'Kata Sandi Lama', 'required');
+		$this->form_validation->set_rules('new_password', 'Kata Sandi Baru', 'required|matches[verify_new_password]');
+		$this->form_validation->set_rules('verify_new_password', 'Verifikasi Kata Sandi Baru', 'required|matches[new_password]');
+		if ($this->form_validation->run() == FALSE) {
+			$data['error_update'] = true;
+			$this->load->view('templates/header', $data);
+			$this->load->view('biodata/profile', $data);
+			$this->load->view('templates/footer', $data);
+		} else {
+			$this->usmo->changePassword();
+		}
+	}
+
 	public function delete($id)
 	{
 		$this->usmo->deleteUser($id);

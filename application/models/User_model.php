@@ -64,6 +64,31 @@ class User_model extends CI_Model {
 		redirect('user');
 	}
 
+	public function changePassword()
+	{
+		$dataUser = $this->mamo->dataUser();
+		$username = $dataUser['username'];
+
+		$old_password = $this->input->post('old_password', true);
+		$new_password = $this->input->post('new_password', true);
+		$verify_new_password = $this->input->post('verify_new_password', true);
+
+		// check old password
+		if (password_verify($old_password, $dataUser['password']) == false) {
+			$this->session->set_flashdata('message-failed', 'Pengguna ' . $username . ' gagal mengubah kata sandi');
+			$this->lomo->insertLog($username . " gagal mengubah kata sandi", $dataUser['id_user']);
+			redirect('biodata/profile');
+		}
+
+		$password_hashed = password_hash($verify_new_password, PASSWORD_DEFAULT);
+
+		$this->db->update('users', ['password' => $password_hashed], ['id_user' => $dataUser['id_user']]);
+		$this->session->set_flashdata('message-success', 'Pengguna ' . $username . ' berhasil mengubah kata sandi');
+		$this->lomo->insertLog($username . " berhasil mengubah kata sandi", $dataUser['id_user']);
+
+		redirect('biodata/profile');
+	}
+
 	public function deleteUser($id)
 	{
 		$dataUser = $this->mamo->dataUser();
