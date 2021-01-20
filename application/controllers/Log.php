@@ -18,8 +18,8 @@ class Log extends CI_Controller {
 		$data['dataUser'] = $this->mamo->dataUser();
 		$data['title'] = 'Riwayat';
 
-		$this->load->view('templates/header', $data);
+		$this->load->view('templates/admin/header', $data);
 		$this->load->view('log/index', $data);
-		$this->load->view('templates/footer', $data);
+		$this->load->view('templates/admin/footer', $data);
 	}
 }

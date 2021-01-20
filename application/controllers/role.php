@@ -17,9 +17,9 @@ class Role extends CI_Controller {
 		$data['dataUser'] = $this->mamo->dataUser();
 		$data['title'] = 'Jabatan';
 
-		$this->load->view('templates/header', $data);
+		$this->load->view('templates/admin/header', $data);
 		$this->load->view('role/index', $data);
-		$this->load->view('templates/footer', $data);
+		$this->load->view('templates/admin/footer', $data);
 	}
 
 	public function insert()
@@ -33,9 +33,9 @@ class Role extends CI_Controller {
 		$this->form_validation->set_rules('role_name', 'Nama Jabatan', 'required|is_unique[roles.role_name]');
 		if ($this->form_validation->run() == FALSE) {
 			$data['error_insert'] = true;
-			$this->load->view('templates/header', $data);
+			$this->load->view('templates/admin/header', $data);
 			$this->load->view('role/index', $data);
-			$this->load->view('templates/footer', $data);
+			$this->load->view('templates/admin/footer', $data);
 		} else {
 			$this->romo->insertRole();
 		}
@@ -52,9 +52,9 @@ class Role extends CI_Controller {
 		$this->form_validation->set_rules('role_name', 'Nama Jabatan', 'required|is_unique[roles.role_name]');
 		if ($this->form_validation->run() == FALSE) {
 			$data['error_update'] = true;
-			$this->load->view('templates/header', $data);
+			$this->load->view('templates/admin/header', $data);
 			$this->load->view('role/index', $data);
-			$this->load->view('templates/footer', $data);
+			$this->load->view('templates/admin/footer', $data);
 		} else {
 			$this->romo->updateRole($id);
 		}

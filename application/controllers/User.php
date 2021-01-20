@@ -21,9 +21,9 @@ class User extends CI_Controller {
 		$data['dataUser'] = $this->mamo->dataUser();
 		$data['title'] = 'Pengguna';
 
-		$this->load->view('templates/header', $data);
+		$this->load->view('templates/admin/header', $data);
 		$this->load->view('user/index', $data);
-		$this->load->view('templates/footer', $data);
+		$this->load->view('templates/admin/footer', $data);
 	}
 
 	public function insert()
@@ -43,9 +43,9 @@ class User extends CI_Controller {
 		$this->form_validation->set_rules('id_role', 'Nama Jabatan', 'required|is_natural_no_zero');
 		if ($this->form_validation->run() == FALSE) {
 			$data['error_insert'] = true;
-			$this->load->view('templates/header', $data);
+			$this->load->view('templates/admin/header', $data);
 			$this->load->view('user/index', $data);
-			$this->load->view('templates/footer', $data);
+			$this->load->view('templates/admin/footer', $data);
 		} else {
 			$this->usmo->insertUser();
 		}
@@ -64,9 +64,9 @@ class User extends CI_Controller {
 		$this->form_validation->set_rules('username', 'Nama Pengguna', 'required|is_unique[users.username]');
 		if ($this->form_validation->run() == FALSE) {
 			$data['error_update'] = true;
-			$this->load->view('templates/header', $data);
+			$this->load->view('templates/admin/header', $data);
 			$this->load->view('user/index', $data);
-			$this->load->view('templates/footer', $data);
+			$this->load->view('templates/admin/footer', $data);
 		} else {
 			$this->usmo->updateUser($id);
 		}
@@ -84,9 +84,9 @@ class User extends CI_Controller {
 		$this->form_validation->set_rules('verify_new_password', 'Verifikasi Kata Sandi Baru', 'required|matches[new_password]');
 		if ($this->form_validation->run() == FALSE) {
 			$data['error_update'] = true;
-			$this->load->view('templates/header', $data);
+			$this->load->view('templates/admin/header', $data);
 			$this->load->view('biodata/profile', $data);
-			$this->load->view('templates/footer', $data);
+			$this->load->view('templates/admin/footer', $data);
 		} else {
 			$this->usmo->changePassword();
 		}

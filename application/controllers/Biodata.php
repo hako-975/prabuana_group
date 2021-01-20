@@ -17,9 +17,9 @@ class Biodata extends CI_Controller {
 		$data['dataUser'] = $this->mamo->dataUser();
 		$data['title'] = 'Karyawan';
 
-		$this->load->view('templates/header', $data);
+		$this->load->view('templates/admin/header', $data);
 		$this->load->view('biodata/index', $data);
-		$this->load->view('templates/footer', $data);
+		$this->load->view('templates/admin/footer', $data);
 	}
 	
 	public function profile()
@@ -28,9 +28,9 @@ class Biodata extends CI_Controller {
 		$data['dataUser'] = $this->mamo->dataUser();
 		$data['title'] = 'Profil';
 		
-		$this->load->view('templates/header', $data);
+		$this->load->view('templates/admin/header', $data);
 		$this->load->view('biodata/profile', $data);
-		$this->load->view('templates/footer', $data);
+		$this->load->view('templates/admin/footer', $data);
 	}
 
 	public function detail($id)
@@ -41,9 +41,9 @@ class Biodata extends CI_Controller {
 		$data['dataUser'] = $this->mamo->dataUser();
 		$data['title'] = 'Detail Karyawan - ' . $data['biodata']['full_name'];
 
-		$this->load->view('templates/header', $data);
+		$this->load->view('templates/admin/header', $data);
 		$this->load->view('biodata/detail', $data);
-		$this->load->view('templates/footer', $data);
+		$this->load->view('templates/admin/footer', $data);
 	}
 
 	public function insert()
@@ -60,9 +60,9 @@ class Biodata extends CI_Controller {
 		$this->form_validation->set_rules('email', 'Email', 'required|is_unique[biodata.email]');
 		if ($this->form_validation->run() == FALSE) {
 			$data['error_insert'] = true;
-			$this->load->view('templates/header', $data);
+			$this->load->view('templates/admin/header', $data);
 			$this->load->view('biodata/index', $data);
-			$this->load->view('templates/footer', $data);
+			$this->load->view('templates/admin/footer', $data);
 		} else {
 			$this->bimo->insertBiodata();
 		}
@@ -81,9 +81,9 @@ class Biodata extends CI_Controller {
 		$this->form_validation->set_rules('address', 'Alamat', 'required');
 		if ($this->form_validation->run() == FALSE) {
 			$data['error_update'] = true;
-			$this->load->view('templates/header', $data);
+			$this->load->view('templates/admin/header', $data);
 			$this->load->view('biodata/index', $data);
-			$this->load->view('templates/footer', $data);
+			$this->load->view('templates/admin/footer', $data);
 		} else {
 			$this->bimo->updateBiodata($id);
 		}

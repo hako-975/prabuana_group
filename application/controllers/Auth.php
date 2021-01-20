@@ -14,9 +14,9 @@ class Auth extends CI_Controller {
 		$this->aumo->checkLogin();
 		
 		$data['title'] = 'Masuk';
-		$this->load->view('templates/header', $data);
+		$this->load->view('templates/admin/header', $data);
 		$this->load->view('auth/login', $data);
-		$this->load->view('templates/footer', $data);
+		$this->load->view('templates/admin/footer', $data);
 	}
 
 	public function login()
